@@ -1,0 +1,76 @@
+lodash equiv
+ https://github.com/samber/lo
+
+functional streams 
+https://github.com/seborama/fuego
+
+
+
+Generic types:
+	type Collection[T any] []T
+
+	type PaginatedResults[T any] struct {
+		Page int
+		Total int
+		Items []T
+	}
+
+generic types must be instantiated:
+	result := PaginatedResults[string]{
+		Page:  1,
+		Total: 10,
+		Items: []string{"1", "2"},
+	}
+
+
+
+Generic Parameters:
+	func Map[T any, E any](items []T, f func(item T) E) []E {
+		
+	}
+
+
+
+Limitations:
+Go generics can only be used in functions, you cannot define generic methods, only functions with no receiver.
+func (r Receiver) [T any]NotAllowed(t T) {...
+func [T any]Allowed(t T) {...
+
+
+
+Constrains:
+	- any
+	- comparable (works with == operator)
+	- constraints.Ordered (works with >,<,>=,etc...)
+
+Custom constraints:
+
+type Stringer interface {
+	String() string
+}
+
+or
+
+type Decimal interface {
+    float32 | float64
+}
+
+Type approximation:
+	func [T ~int]F...
+matches type int but also types derived from int eg.
+type Number int
+
+
+
+Practical Use Cases:
+
+
+Slice copying and garbage collection:
+
+
+
+Using Map/Reduce for building test data and test cases
+
+
+
+
