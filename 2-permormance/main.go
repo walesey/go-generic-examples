@@ -5,8 +5,11 @@ import (
 	"strconv"
 )
 
-// define filter and unique funtions that reuse the original slice memory
-// This saves on memory allocations and garbage collection
+// If you wanted to filter a very large list you won't want to create an entire copy of the list.
+// Define filter and unique funtions that reuse the original slice memory.
+// These functions are passed a list by reference to manipulate the original slice via pointer.
+// This saves on memory allocations and garbage collection.
+// Note: the order is not preserved, as this allows us to reuse the slice memory for max performance.
 
 func Filter[T any](list *[]T, fn func(T) bool) {
 	for i := 0; i < len(*list); {
