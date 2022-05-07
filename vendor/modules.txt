@@ -1,5 +1,3 @@
-# github.com/dsnet/try v0.0.2
-## explicit; go 1.18
 # golang.org/x/exp v0.0.0-20220428152302-39d4317da171
 ## explicit; go 1.18
 golang.org/x/exp/constraints
