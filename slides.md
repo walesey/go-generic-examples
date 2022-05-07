@@ -81,7 +81,6 @@ Such as: `==`, `>`, `<` or any of the arithmetic or bitwise operators:
 * constraints.Unsigned
 * constraints.Signed
 * constraints.Complex
-    
 
 # 6 - Custom constraints:
 A constraint can be defined as any interface with a particalar set of functions: 
@@ -105,11 +104,39 @@ or You can define a custom constraint as a union of multiple types or constraint
     }
 ```
 
-
 # 7 - Type approximation
 `~int` matches type int but also types derived from int eg. `type Integer int`
 ``` go
     type Float interface {
         ~float32 | ~float64
+    }
+```
+
+# 8 - Constraint Examples
+
+### Sort any slice of ordered types
+``` go
+    func SortOrdered[T constraints.Ordered](list []T) {
+        sort.Slice(
+            list,
+            func(i, j int) bool {
+                return list[i] < list[j]
+            },
+        )
+    }
+```
+
+### Sum any slice of Floats or Integers
+``` go
+    type Number interface {
+        constraints.Float | constraints.Integer
+    }
+
+    func Sum[T Number](list []T) T {
+        var sum T
+        for _, elem := range list {
+            sum += elem
+        }
+        return sum
     }
 ```
