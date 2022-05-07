@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"sync"
 	"time"
 )
@@ -43,49 +44,18 @@ func Parallel[T any](tasks ...func() (T, error)) ([]T, int, error) {
 }
 
 func main() {
-	results, _, err := Parallel[string](
-		func() (string, error) {
-			time.Sleep(2 * time.Second)
-			return "1", nil
-		},
-		func() (string, error) {
-			time.Sleep(1 * time.Second)
-			return "2", nil
-		},
-		func() (string, error) {
-			time.Sleep(4 * time.Second)
-			return "3", nil
-		},
-		func() (string, error) {
-			time.Sleep(3 * time.Second)
-			return "4", nil
-		},
+	files, errNb, err := Parallel[[]byte](
+		func() ([]byte, error) { return os.ReadFile("./main.go") },
+		func() ([]byte, error) { return os.ReadFile("./README.md") },
+		func() ([]byte, error) { return os.ReadFile("./go.mod") },
+		func() ([]byte, error) { return os.ReadFile("./go.sum") },
 	)
 
-	fmt.Println(results)
-	fmt.Println(err)
-	// output
-	// [1 2 3 4]
-	// <nil>
-
-	results, errNb, err := Parallel[string](
-		func() (string, error) {
-			return "1", nil
-		},
-		func() (string, error) {
-			return "failed", fmt.Errorf("failed")
-		},
-		func() (string, error) {
-			return "3", nil
-		},
-	)
-
-	fmt.Println(results)
+	fmt.Println(len(files[0]), len(files[1]), len(files[2]), len(files[3]))
 	fmt.Println(err)
 	fmt.Println(errNb)
-	// output
-	// [1 failed 3]
-	// failed
-	// 1
-
+	// output:
+	// 536 89 91 207
+	// <nil>
+	// -1
 }
