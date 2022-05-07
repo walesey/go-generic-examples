@@ -4,10 +4,10 @@ Cover Pic
 
 # 2 - Generics Basics
 ### Concepts
-    - Generic types
-    - Generic Parameters
-    - Generic Constrains
-    - Type approximation
+    * Generic types
+    * Generic Parameters
+    * Generic Constrains
+    * Type approximation
 
 
 # 3 - Generic types
@@ -72,14 +72,14 @@ func [T any]Allowed(t T) {...
 # 5 - Generic Constrains
 generic constraints allow you to continue to use go language primitives in your functions.
 Such as: `==`, `>`, `<` or any of the arithmetic or bitwise operators:
-    - any
-	- comparable (works with comparison operator: ==)
-	- constraints.Ordered (works with order operators: >, <, >= , etc...)
-    - constraints.Integer (works with bitwise/bitshift operators: &, |, ^, <<, >>)
-    - constraints.Float (works with arithmetic operators: +, -, *, /, %)
-    - constraints.Unsigned
-    - constraints.Signed
-    - constraints.Complex
+    * any
+	* comparable (works with comparison operator: ==)
+	* constraints.Ordered (works with order operators: >, <, >= , etc...)
+    * constraints.Integer (works with bitwise/bitshift operators: &, |, ^, <<, >>)
+    * constraints.Float (works with arithmetic operators: +, -, *, /, %)
+    * constraints.Unsigned
+    * constraints.Signed
+    * constraints.Complex
     
 
 # 6 - Custom constraints:
