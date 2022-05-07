@@ -4,10 +4,10 @@ Cover Pic
 
 # 2 - Generics Basics
 ### Concepts
-    * Generic types
-    * Generic Parameters
-    * Generic Constrains
-    * Type approximation
+* Generic types
+* Generic Parameters
+* Generic Constrains
+* Type approximation
 
 
 # 3 - Generic types
