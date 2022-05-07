@@ -67,10 +67,3 @@ Practical Use Cases:
 
 Slice copying and garbage collection:
 
-
-
-Using Map/Reduce for building test data and test cases
-
-
-
-

@@ -31,6 +31,7 @@ func main() {
 	fmt.Println(ints)
 	fmt.Println(floats)
 
+	// output
 	// [a b c d e f g]
 	// [0 1 2 3 4 5 6 7 8 9]
 	// [-3.8 -1.3 0.7 2.6 5.2]

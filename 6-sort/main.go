@@ -35,6 +35,7 @@ func main() {
 	Sort(people, ByName)
 	fmt.Println(people)
 
+	// output
 	// [{Sally 23} {John 34} {Bob 47}]
 	// [{Bob 47} {John 34} {Sally 23}]
 }

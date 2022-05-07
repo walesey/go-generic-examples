@@ -52,6 +52,7 @@ func main() {
 	Filter(&strs, IsInt)
 	fmt.Println(strs)
 
+	// output
 	// [a b c 1 2 3 4 5 1 2 3 4 5]
 	// [a b c 1 2 3 4 5]
 	// [5 4 3 1 2]

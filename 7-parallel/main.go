@@ -59,6 +59,7 @@ func main() {
 	fmt.Println(results)
 	fmt.Println(errs)
 
+	// output
 	// [1 failed 2 3]
 	// [<nil> failed <nil> <nil>]
 }
