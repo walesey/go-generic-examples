@@ -5,6 +5,8 @@ import (
 	"regexp"
 )
 
+// Here we can define generic map functionality with a parameter for both the map key 'K' and value 'V'
+
 func Keys[K comparable, V any](m map[K]V) []K {
 	results := make([]K, 0, len(m))
 	for k := range m {

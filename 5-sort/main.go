@@ -7,10 +7,12 @@ import (
 )
 
 /*
-	Convenient wrapper for:
+	the sort package in go contains sort functions as follows:
 	sort.Float64s
 	sort.Ints
 	sort.String
+
+	Here we can define an even more generic function that encompasses all Ordered types (types that work with '>'):
 */
 
 // sort.Ordered

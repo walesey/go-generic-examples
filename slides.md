@@ -20,6 +20,7 @@ as well as reducing the use of `interface{}` and losing valuable type informatio
 We can create a generic pagination type as well as a generic Collection type:
 Note that the in Collection[T], the `T` Parameter must be passed through.
 ``` go
+
     type Collection[T any] []T
 
 	type PaginatedResults[T any] struct {
@@ -27,21 +28,43 @@ Note that the in Collection[T], the `T` Parameter must be passed through.
 		Total int
 		Items Collection[T]
 	}
+
 ```
 
 ### generic types must be instantiated with `[string]`:
 ``` go
+
 	result := PaginatedResults[string]{
 		Page:  1,
 		Total: 10,
 		Items: []string{"1", "2"},
 	}
+
 ```
 We have used these types in production for some of our paginated rest API endpoints.
 
 
 # 4 - Generic Parameters
 ``` go
+
+    func Copy[T any](s []T) []T {
+        results = make([]T, 0, len(s))
+        for _, elem := range s {
+            results = append(results, elem)
+        }
+        return results
+    }
+
+    strs := []string{"a", "b", "c"}
+    cpStrs := Copy(strs)
+
+    ints := []int{"a", "b", "c"}
+    cpInts := Copy(ints)
+    
+```
+
+``` go
+
     func Map[T any, P any](items []T, fn func(T) P) []P {
         results := make([]P, 0, len(items))
         for _, elem := range items {
@@ -49,15 +72,18 @@ We have used these types in production for some of our paginated rest API endpoi
         }
         return results
     }
+
 ```
 Generic functions can make use of type inference:
 ``` go
+
     func IntToString(i int) string { return fmt.Sprint(i) }
 
     func main() {
         ints := []int{1, 2, 3, 4, 5}
         strs := Map(ints, IntToString)
     }  
+
 ```
 
 The type of `strs` can be inferred (`[]string`) based on the return type of `IntToString` being a `string`
@@ -65,8 +91,10 @@ The type of `strs` can be inferred (`[]string`) based on the return type of `Int
 ### Limitations:
 Generic Parameters can only be used in functions, you cannot define generic methods, only functions with no receiver.
 ``` go
-func (r Receiver) [T any]NotAllowed(t T) {...
-func [T any]Allowed(t T) {...
+
+    func (r Receiver) [T any]NotAllowed(t T) {...
+    func [T any]Allowed(t T) {...
+
 ```
 
 
@@ -86,12 +114,19 @@ Such as: `==`, `>`, `<` or any of the arithmetic or bitwise operators:
 # 6 - Custom constraints:
 A constraint can be defined as any interface with a particalar set of functions: 
 ``` go
+
     type Stringer interface {
         String() string
     }
+
+    func ToString[T Stringer](items T[]) string {
+        ...
+    }
+
 ```
 or You can define a custom constraint as a union of multiple types or constraints
 ``` go
+
     type Decimal interface {
         float32 | float64
     }
@@ -103,20 +138,28 @@ or You can define a custom constraint as a union of multiple types or constraint
     type Number interface {
         Decimal | Integer
     }
+
 ```
 
 # 7 - Type approximation
 `~int` matches type int but also types derived from int eg. `type Integer int`
 ``` go
+
+    type Integer interface {
+        ~int | ~int8 | ~int16 | ~int32 | ~int64
+    }
+
     type Float interface {
         ~float32 | ~float64
     }
+
 ```
 
 # 8 - Constraint Examples
 
 ### Sort any slice of ordered types
 ``` go
+
     func SortOrdered[T constraints.Ordered](list []T) {
         sort.Slice(
             list,
@@ -125,10 +168,12 @@ or You can define a custom constraint as a union of multiple types or constraint
             },
         )
     }
+
 ```
 
 ### Sum any slice of Floats or Integers
 ``` go
+
     type Number interface {
         constraints.Float | constraints.Integer
     }
@@ -140,4 +185,5 @@ or You can define a custom constraint as a union of multiple types or constraint
         }
         return sum
     }
+
 ```

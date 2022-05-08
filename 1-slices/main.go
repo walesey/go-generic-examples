@@ -5,6 +5,8 @@ import (
 	"strconv"
 )
 
+// Here we can define generic filter or Unique functions to apply to any kind of slice
+
 func Filter[T any](list []T, fn func(T) bool) []T {
 	results := []T{}
 	for _, item := range list {

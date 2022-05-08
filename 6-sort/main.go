@@ -5,6 +5,8 @@ import (
 	"sort"
 )
 
+// We can even define a generic sort function that takes it's own 'less' function
+
 func Sort[T any](list []T, less func(T, T) bool) {
 	sort.Slice(list, func(i, j int) bool { return less(list[i], list[j]) })
 }

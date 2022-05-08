@@ -5,6 +5,8 @@ import (
 	"golang.org/x/exp/constraints"
 )
 
+// Here we can use constraints to define generic functions that make use of += (Sum) and > (Max) operators
+
 type Number interface {
 	constraints.Float | constraints.Integer
 }

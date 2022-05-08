@@ -5,6 +5,8 @@ import (
 	"golang.org/x/exp/constraints"
 )
 
+// Map function, allows you to map a slice of one type to a slice of a new type
+
 func Map[T any, P any](items []T, fn func(T) P) []P {
 	results := make([]P, 0, len(items))
 	for _, elem := range items {
