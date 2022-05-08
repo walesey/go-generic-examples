@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"sync"
-	"time"
 )
 
 // A generic implementation of a parallel task runner using go routines, mutex and waitgroup to run

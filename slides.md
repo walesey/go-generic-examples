@@ -37,6 +37,7 @@ Note that the in Collection[T], the `T` Parameter must be passed through.
 		Items: []string{"1", "2"},
 	}
 ```
+We have used these types in production for some of our paginated rest API endpoints.
 
 
 # 4 - Generic Parameters
